@@ -1,2 +1,7 @@
 # go-tryalgo
-Basic and (maybe) advanced algorithms and data structures
+
+Basic and (maybe) advanced algorithms and data structures.
+
+## License
+
+MIT
