@@ -39,4 +39,9 @@ func TestInts(t *testing.T) {
 	if !intersect(2, 1) {
 		t.Errorf("intersect(2, 1) = false, expected true")
 	}
+
+	ints.Union(0, 1)
+	if !intersect(0, 1) {
+		t.Errorf("intersect(0, 1) = false after Union(0, 1), expected true")
+	}
 }

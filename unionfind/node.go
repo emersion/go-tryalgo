@@ -31,6 +31,9 @@ func (uf *Node) Find() interface{} {
 func (uf *Node) Union(other *Node) {
 	root := uf.find()
 	otherRoot := other.find()
+	if root == otherRoot {
+		return
+	}
 
 	if root.rank == otherRoot.rank {
 		root.rank++

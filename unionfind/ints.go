@@ -33,6 +33,9 @@ func (ints *Ints) Find(i int) int {
 func (ints *Ints) Union(i, j int) {
 	pi := ints.Find(i)
 	pj := ints.Find(j)
+	if pi == pj {
+		return
+	}
 
 	if ints.ranks[pi] > ints.ranks[pj] {
 		ints.parents[pj] = pi

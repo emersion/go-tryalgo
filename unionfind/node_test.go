@@ -43,4 +43,9 @@ func TestNode(t *testing.T) {
 	if !intersect(three, two) {
 		t.Errorf("intersect(three, two) = false, expected true")
 	}
+
+	one.Union(two)
+	if !intersect(one, two) {
+		t.Errorf("intersect(one, two) = false, expected true")
+	}
 }
