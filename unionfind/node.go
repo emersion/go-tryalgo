@@ -1,16 +1,16 @@
-package tryalgo
+package unionfind
 
-type UnionFind struct {
+type Node struct {
 	Value interface{}
-	parent *UnionFind
+	parent *Node
 	rank int
 }
 
-func NewUnionFind(v interface{}) *UnionFind {
-	return &UnionFind{Value: v}
+func NewNode(v interface{}) *Node {
+	return &Node{Value: v}
 }
 
-func (uf *UnionFind) find() *UnionFind {
+func (uf *Node) find() *Node {
 	node := uf
 	for node.parent != nil {
 		node = node.parent
@@ -24,11 +24,11 @@ func (uf *UnionFind) find() *UnionFind {
 	return node
 }
 
-func (uf *UnionFind) Find() interface{} {
+func (uf *Node) Find() interface{} {
 	return uf.find().Value
 }
 
-func (uf *UnionFind) Union(other *UnionFind) {
+func (uf *Node) Union(other *Node) {
 	root := uf.find()
 	otherRoot := other.find()
 

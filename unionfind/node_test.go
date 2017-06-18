@@ -1,18 +1,18 @@
-package tryalgo_test
+package unionfind_test
 
 import (
 	"testing"
 
-	"github.com/emersion/go-tryalgo"
+	"github.com/emersion/go-tryalgo/unionfind"
 )
 
-func TestUnionFind(t *testing.T) {
-	one := tryalgo.NewUnionFind(1)
-	two := tryalgo.NewUnionFind(2)
-	three := tryalgo.NewUnionFind(3)
-	four := tryalgo.NewUnionFind(4)
+func TestNode(t *testing.T) {
+	one := unionfind.NewNode(1)
+	two := unionfind.NewNode(2)
+	three := unionfind.NewNode(3)
+	four := unionfind.NewNode(4)
 
-	intersect := func (a, b *tryalgo.UnionFind) bool {
+	intersect := func (a, b *unionfind.Node) bool {
 		return a.Find().(int) == b.Find().(int)
 	}
 
