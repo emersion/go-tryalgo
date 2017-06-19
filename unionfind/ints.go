@@ -1,10 +1,15 @@
 package unionfind
 
+// Ints represents disjoint sets of integers.
+//
+// Complexity in memory: O(n), n being the capacity
 type Ints struct {
 	parents []int
 	ranks []int
 }
 
+// NewInts creates a new disjoint sets container containing one class for each
+// integer from 0 to n-1.
 func NewInts(n int) *Ints {
 	parents := make([]int, n, n)
 	for i := range parents {
@@ -17,6 +22,10 @@ func NewInts(n int) *Ints {
 	}
 }
 
+// Find returns the representative member of i. Two integers i and j are in the
+// same set if and only if Find(i) == Find(j).
+//
+// Complexity: O(α(n))
 func (ints *Ints) Find(i int) int {
 	j := i
 	for {
@@ -30,6 +39,9 @@ func (ints *Ints) Find(i int) int {
 	}
 }
 
+// Union merges the sets where i and j are.
+//
+// Complexity: O(α(n))
 func (ints *Ints) Union(i, j int) {
 	pi := ints.Find(i)
 	pj := ints.Find(j)
