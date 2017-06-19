@@ -25,6 +25,16 @@ func (n *node) computeHeight() {
 	n.h = 1 + h
 }
 
+func (n *node) removeMin() (*node, interface{}) {
+	if n.left == nil {
+		return n.right, n.value
+	}
+
+	var v interface{}
+	n.left, v = n.left.removeMin()
+	return n, v
+}
+
 // Assumes n != nil && n.left != nil
 func (n *node) rotateRight() *node {
 	l := n.left
@@ -68,6 +78,26 @@ func (n *node) balance() *node {
 	}
 }
 
+func (n *node) remove(v interface{}, less LessFunc) *node {
+	if n == nil {
+		return nil
+	}
+
+	if less(v, n.value) {
+		n.left = n.left.remove(v, less)
+	} else if less(n.value, v) {
+		n.right = n.right.remove(v, less)
+	} else {
+		if n.right == nil {
+			return n.left
+		}
+		n.right, n.value = n.right.removeMin()
+		n = n.balance()
+	}
+
+	return n
+}
+
 type AVL struct {
 	less LessFunc
 	root *node
@@ -77,7 +107,7 @@ func NewAVL(less LessFunc) *AVL {
 	return &AVL{less: less}
 }
 
-func (avl *AVL) find(v interface{}) *node {
+func (avl *AVL) Contains(v interface{}) bool {
 	n := avl.root
 	for n != nil {
 		if avl.less(v, n.value) {
@@ -85,14 +115,10 @@ func (avl *AVL) find(v interface{}) *node {
 		} else if avl.less(n.value, v) {
 			n = n.right
 		} else {
-			return n
+			return true
 		}
 	}
-	return nil
-}
-
-func (avl *AVL) Contains(v interface{}) bool {
-	return avl.find(v) != nil
+	return false
 }
 
 func (avl *AVL) Append(v interface{}) {
@@ -122,4 +148,8 @@ func (avl *AVL) Append(v interface{}) {
 	}
 
 	avl.root = avl.root.balance()
+}
+
+func (avl *AVL) Remove(v interface{}) {
+	avl.root = avl.root.remove(v, avl.less)
 }

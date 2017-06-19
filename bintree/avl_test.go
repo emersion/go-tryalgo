@@ -39,4 +39,9 @@ func TestAVL(t *testing.T) {
 	if !avl.Contains(5) {
 		t.Errorf("avl.Contains(5) = false, want true")
 	}
+
+	avl.Remove(9)
+	if avl.Contains(9) {
+		t.Errorf("avl.Contains(3) = true after avl.Remove(3), want false")
+	}
 }
