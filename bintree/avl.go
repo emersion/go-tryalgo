@@ -1,5 +1,6 @@
 package bintree
 
+// LessFunc compares a and b and returns true if and only if a < b.
 type LessFunc func(a, b interface{}) bool
 
 type node struct {
@@ -98,15 +99,20 @@ func (n *node) remove(v interface{}, less LessFunc) *node {
 	return n
 }
 
+// An AVL is a self-balanced Binary Search Tree (BST).
 type AVL struct {
 	less LessFunc
 	root *node
 }
 
+// NewAVL creates a new AVL.
 func NewAVL(less LessFunc) *AVL {
 	return &AVL{less: less}
 }
 
+// Contains checks if a value is in the tree.
+//
+// Complexity: O(log(n))
 func (avl *AVL) Contains(v interface{}) bool {
 	n := avl.root
 	for n != nil {
@@ -121,6 +127,9 @@ func (avl *AVL) Contains(v interface{}) bool {
 	return false
 }
 
+// Append adds a new value to the tree.
+//
+// Complexity: O(log(n))
 func (avl *AVL) Append(v interface{}) {
 	newNode := &node{value: v}
 	if avl.root == nil {
@@ -150,6 +159,9 @@ func (avl *AVL) Append(v interface{}) {
 	avl.root = avl.root.balance()
 }
 
+// Remove removes a value from the tree.
+//
+// Complexity: O(log(n))
 func (avl *AVL) Remove(v interface{}) {
 	avl.root = avl.root.remove(v, avl.less)
 }

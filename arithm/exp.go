@@ -1,5 +1,6 @@
 package arithm
 
+// Exp computes x^n.
 func Exp(x, n int) int {
 	r := 1
 	for n > 0 {
@@ -12,6 +13,7 @@ func Exp(x, n int) int {
 	return r
 }
 
+// ExpMod computes x^n % q.
 func ExpMod(x, n, q int) int {
 	r := 1
 	for n > 0 {
