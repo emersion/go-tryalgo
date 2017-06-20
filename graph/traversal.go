@@ -51,7 +51,7 @@ type iterativeDFSItem struct {
 //
 // Iterative DFS behaves like BFS but uses DFS internally. It can be used to
 // traverse very large graphs since it has a memory usage much lower than BFS.
-// Though, IterativeDFS is ~2 times slower than DFS.
+// Though, IterativeDFS is ~2 times slower than DFS for a binary tree.
 func IterativeDFS(g Graph, src int, f func(int)) {
 	seen := make(map[int]int)
 	seen[src] = 0
