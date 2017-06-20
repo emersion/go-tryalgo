@@ -8,14 +8,24 @@ func parentIndex(i int) int {
 	return (i-1)/2
 }
 
+// defaultIntsLess is the default less function for integers.
+func defaultIntsLess(i, j int) bool {
+	return i < j
+}
+
 // Ints is a heap that stores integers.
 type Ints struct {
 	tree []int
+	less func(i, j int) bool
 }
 
-// NewInts creates a new integer heap.
-func NewInts() *Ints {
-	return new(Ints)
+// NewInts creates a new integer heap. less reports whether i should sort before
+// j. If nil, less defaults to i < j.
+func NewInts(less func(i, j int) bool) *Ints {
+	if less == nil {
+		less = defaultIntsLess
+	}
+	return &Ints{less: less}
 }
 
 // Len returns the number of elements in the heap.
@@ -41,7 +51,7 @@ func (ints *Ints) moveUp(v, i int) {
 
 	pi := parentIndex(i)
 	pv := ints.tree[pi]
-	if pv > v {
+	if ints.less(v, pv) {
 		ints.tree[i] = pv
 		ints.moveUp(v, pi)
 	} else {
@@ -59,12 +69,12 @@ func (ints *Ints) moveDown(v, i int) {
 
 	// Select the child with the lowest value
 	mi := li
-	if ri < len(ints.tree) && ints.tree[li] > ints.tree[ri] {
+	if ri < len(ints.tree) && ints.less(ints.tree[ri], ints.tree[li]) {
 		mi = ri
 	}
 
 	mv := ints.tree[mi]
-	if mv < v {
+	if ints.less(mv, v) {
 		ints.tree[i] = mv
 		ints.moveDown(v, mi)
 	} else {
@@ -72,27 +82,30 @@ func (ints *Ints) moveDown(v, i int) {
 	}
 }
 
-// Append adds a new element to the heap.
+// Push adds a new element to the heap.
 //
 // Complexity: O(log(ints.Len()))
-func (ints *Ints) Append(v int) {
+func (ints *Ints) Push(v int) {
 	ints.tree = append(ints.tree, v)
 	ints.moveUp(v, len(ints.tree)-1)
 }
 
-// RemoveMin removes the lowest element from the heap.
+// Pop removes the lowest element from the heap.
 //
 // Complexity: O(log(ints.Len()))
-func (ints *Ints) RemoveMin() {
-	n := len(ints.tree) - 1
-	if n < 0 {
-		return
+func (ints *Ints) Pop() (int, bool) {
+	v, ok := ints.Min()
+	if !ok {
+		return 0, false
 	}
 
+	n := len(ints.tree) - 1
 	mv := ints.tree[n]
 	ints.tree = ints.tree[:n]
 
 	if n > 0 {
 		ints.moveDown(mv, 0)
 	}
+
+	return v, true
 }

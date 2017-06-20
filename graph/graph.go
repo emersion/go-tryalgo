@@ -17,9 +17,9 @@ func NewIntList(l [][]int) Graph {
 	return intList(l)
 }
 
-type intMatrix [][]bool
+type boolMatrix [][]bool
 
-func (m intMatrix) Neighbours(i int) []int {
+func (m boolMatrix) Neighbours(i int) []int {
 	var l []int
 	for j, v := range m[i] {
 		if v {
@@ -29,7 +29,37 @@ func (m intMatrix) Neighbours(i int) []int {
 	return l
 }
 
-// NewIntMatrix creates a new integer graph from an adjacency matrix.
-func NewIntMatrix(m [][]bool) Graph {
+// NewBoolMatrix creates a new integer graph from an adjacency matrix.
+func NewBoolMatrix(m [][]bool) Graph {
+	return boolMatrix(m)
+}
+
+// ValuedGraph is a graph with values on edges.
+type ValuedGraph interface {
+	Graph
+
+	// Distance returns the distance from i to its neighbour j.
+	Distance(i, j int) int
+}
+
+type intMatrix [][]int
+
+func (m intMatrix) Neighbours(i int) []int {
+	var l []int
+	for j, v := range m[i] {
+		if v >= 0 {
+			// TODO: support negative values
+			l = append(l, j)
+		}
+	}
+	return l
+}
+
+func (m intMatrix) Distance(i, j int) int {
+	return m[i][j]
+}
+
+// NewIntMatrix creates a new integer valued graph from an adjacency matrix.
+func NewIntMatrix(m [][]int) ValuedGraph {
 	return intMatrix(m)
 }
