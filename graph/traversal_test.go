@@ -31,3 +31,15 @@ func TestBFS(t *testing.T) {
 		t.Errorf("graph.BFS() = %v, want %v", l, want)
 	}
 }
+
+func TestIterativeDFS(t *testing.T) {
+	var l []int
+	graph.IterativeDFS(testGraph, 0, func(i int) {
+		l = append(l, i)
+	})
+
+	want := []int{0, 1, 2, 3, 5, 6, 4}
+	if !reflect.DeepEqual(l, want) {
+		t.Errorf("graph.IterativeDFS() = %v, want %v", l, want)
+	}
+}
