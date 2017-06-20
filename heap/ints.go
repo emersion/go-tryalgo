@@ -8,18 +8,24 @@ func parentIndex(i int) int {
 	return (i-1)/2
 }
 
+// Ints is a heap that stores integers.
 type Ints struct {
 	tree []int
 }
 
+// NewInts creates a new integer heap.
 func NewInts() *Ints {
 	return new(Ints)
 }
 
+// Len returns the number of elements in the heap.
 func (ints *Ints) Len() int {
 	return len(ints.tree)
 }
 
+// Min returns the lowest element in the heap.
+//
+// Complexity: O(1)
 func (ints *Ints) Min() (int, bool) {
 	if len(ints.tree) == 0 {
 		return 0, false
@@ -66,11 +72,17 @@ func (ints *Ints) moveDown(v, i int) {
 	}
 }
 
+// Append adds a new element to the heap.
+//
+// Complexity: O(log(ints.Len()))
 func (ints *Ints) Append(v int) {
 	ints.tree = append(ints.tree, v)
 	ints.moveUp(v, len(ints.tree)-1)
 }
 
+// RemoveMin removes the lowest element from the heap.
+//
+// Complexity: O(log(ints.Len()))
 func (ints *Ints) RemoveMin() {
 	n := len(ints.tree) - 1
 	if n < 0 {
