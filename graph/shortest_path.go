@@ -18,11 +18,10 @@ func Dijkstra(g ValuedGraph, src, dst int) []int {
 	// TODO: use slices instead of maps
 	dist := map[int]int{src: 0}
 	prev := make(map[int]int)
-	h := heap.NewInts(func (i, j int) bool {
+	h := heap.NewInts([]int{src}, func (i, j int) bool {
 		return dist[i] < dist[j]
 	})
 
-	h.Push(src)
 	for {
 		node, ok := h.Pop()
 		if !ok {

@@ -19,13 +19,26 @@ type Ints struct {
 	less func(i, j int) bool
 }
 
-// NewInts creates a new integer heap. less reports whether i should sort before
-// j. If nil, less defaults to i < j.
-func NewInts(less func(i, j int) bool) *Ints {
+// NewInts creates a new integer heap. If not nil, l is the initial contents of
+// the heap. less reports whether i should sort before j. If nil, less defaults
+// to i < j.
+func NewInts(l []int, less func(i, j int) bool) *Ints {
 	if less == nil {
 		less = defaultIntsLess
 	}
-	return &Ints{less: less}
+	ints := &Ints{tree: l, less: less}
+
+	if n := len(l); len(l) > 1 {
+		// We have to reorder elements so that ints.tree becomes a heap
+		// Move down all elements
+		// Complexity: O(n)
+		// TODO: do not move down the last level
+		for i := n-1; i >= 0; i-- {
+			ints.moveDown(ints.tree[i], i)
+		}
+	}
+
+	return ints
 }
 
 // Len returns the number of elements in the heap.
