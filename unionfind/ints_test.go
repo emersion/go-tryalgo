@@ -9,7 +9,7 @@ import (
 func TestInts(t *testing.T) {
 	ints := unionfind.NewInts(4)
 
-	intersect := func (i, j int) bool {
+	intersect := func(i, j int) bool {
 		return ints.Find(i) == ints.Find(j)
 	}
 

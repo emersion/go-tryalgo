@@ -5,7 +5,7 @@ package unionfind
 // Complexity in memory: O(n), n being the capacity
 type Ints struct {
 	parents []int
-	ranks []int
+	ranks   []int
 }
 
 // NewInts creates a new disjoint sets container containing one class for each
@@ -18,7 +18,7 @@ func NewInts(n int) *Ints {
 
 	return &Ints{
 		parents: parents,
-		ranks: make([]int, n, n),
+		ranks:   make([]int, n, n),
 	}
 }
 

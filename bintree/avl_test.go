@@ -7,7 +7,7 @@ import (
 )
 
 func TestAVL(t *testing.T) {
-	avl := bintree.NewAVL(func (a, b interface{}) bool {
+	avl := bintree.NewAVL(func(a, b interface{}) bool {
 		return a.(int) < b.(int)
 	})
 

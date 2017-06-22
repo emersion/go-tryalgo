@@ -12,7 +12,7 @@ func TestNode(t *testing.T) {
 	three := unionfind.NewNode(3)
 	four := unionfind.NewNode(4)
 
-	intersect := func (a, b *unionfind.Node) bool {
+	intersect := func(a, b *unionfind.Node) bool {
 		return a.Find().(int) == b.Find().(int)
 	}
 

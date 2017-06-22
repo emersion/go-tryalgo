@@ -1,11 +1,11 @@
 package heap
 
 func childrenIndexes(i int) (int, int) {
-	return 2*i+1, 2*i+2
+	return 2*i + 1, 2*i + 2
 }
 
 func parentIndex(i int) int {
-	return (i-1)/2
+	return (i - 1) / 2
 }
 
 // defaultIntsLess is the default less function for integers.
@@ -33,7 +33,7 @@ func NewInts(l []int, less func(i, j int) bool) *Ints {
 		// Move down all elements
 		// Complexity: O(n)
 		// TODO: do not move down the last level
-		for i := n-1; i >= 0; i-- {
+		for i := n - 1; i >= 0; i-- {
 			ints.moveDown(ints.tree[i], i)
 		}
 	}

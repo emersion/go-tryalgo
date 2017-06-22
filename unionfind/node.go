@@ -2,9 +2,9 @@ package unionfind
 
 // A Node is a set of values.
 type Node struct {
-	Value interface{}
+	Value  interface{}
 	parent *Node
-	rank int
+	rank   int
 }
 
 // NewNode creates a new set of values.

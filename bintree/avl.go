@@ -4,8 +4,8 @@ package bintree
 type LessFunc func(a, b interface{}) bool
 
 type node struct {
-	value interface{}
-	h int
+	value       interface{}
+	h           int
 	left, right *node
 }
 
@@ -61,13 +61,13 @@ func (n *node) balance() *node {
 
 	l, r := n.left, n.right
 	hl, hr := l.height(), r.height()
-	if hl > hr + 1 {
+	if hl > hr+1 {
 		ll, lr := l.left, l.right
 		if ll.height() < lr.height() {
 			n.left = l.rotateLeft()
 		}
 		return n.rotateRight()
-	} else if hr > hl + 1 {
+	} else if hr > hl+1 {
 		rl, rr := r.left, r.right
 		if rr.height() < rl.height() {
 			n.right = r.rotateRight()

@@ -3,7 +3,7 @@ package trie
 
 // A Node contains byte words.
 type Node struct {
-	leaf bool
+	leaf     bool
 	children map[byte]*Node
 }
 

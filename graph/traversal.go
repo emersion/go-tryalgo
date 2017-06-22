@@ -43,7 +43,7 @@ func BFS(g Graph, src int, f func(int)) {
 }
 
 type iterativeDFSItem struct {
-	node int
+	node  int
 	depth int
 }
 
@@ -77,7 +77,7 @@ func IterativeDFS(g Graph, src int, f func(int)) {
 					continue
 				}
 				seen[neighbour] = maxDepth
-				stack = append(stack, iterativeDFSItem{neighbour, depth+1})
+				stack = append(stack, iterativeDFSItem{neighbour, depth + 1})
 			}
 		}
 

@@ -7,9 +7,9 @@ import (
 
 // Rope is a []byte representation.
 type Rope struct {
-	len int
-	b []byte // for leafs
-	left, right *Rope // for internal nodes
+	len         int
+	b           []byte // for leafs
+	left, right *Rope  // for internal nodes
 }
 
 // New creates a new rope containing b.
@@ -60,11 +60,11 @@ func (r *Rope) Slice(low, high int) *Rope {
 		return r.left.Slice(low, high)
 	}
 	if low > r.left.len {
-		return r.right.Slice(low - r.left.len, high)
+		return r.right.Slice(low-r.left.len, high)
 	}
 
 	left := r.left.Slice(low, r.left.len)
-	right := r.right.Slice(0, high - r.left.len)
+	right := r.right.Slice(0, high-r.left.len)
 	return Merge(left, right)
 }
 
