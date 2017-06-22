@@ -44,3 +44,18 @@ func (n *Node) Append(word []byte) {
 	}
 	cur.leaf = true
 }
+
+// Remove removes a word from this node.
+//
+// Complexity: O(len(word))
+func (n *Node) Remove(word []byte) {
+	cur := n
+	for _, b := range word {
+		cur = cur.children[b]
+		if cur == nil {
+			return
+		}
+	}
+	cur.leaf = false
+	// TODO: cleanup empty branches
+}

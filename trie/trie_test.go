@@ -27,4 +27,12 @@ func TestNode(t *testing.T) {
 	if n.Contains([]byte("serial exp")) {
 		t.Errorf("n.Contains(serial exp) = true, want false")
 	}
+
+	n.Remove([]byte("serial"))
+	if n.Contains([]byte("serial")) {
+		t.Errorf("n.Contains(serial) = true, want false")
+	}
+	if !n.Contains([]byte("serial experiments lain")) {
+		t.Errorf("n.Contains(serial experiments lain) = false, want true")
+	}
 }
