@@ -1,12 +1,12 @@
 package sort
 
 func split(a []int) ([]int, []int) {
-	i := len(a)/2
+	i := len(a) / 2
 	return a[:i], a[i:]
 }
 
 func merge(a1, a2 []int) []int {
-	a := make([]int, len(a1) + len(a2))
+	a := make([]int, len(a1)+len(a2))
 	i, j := 0, 0
 	for i < len(a1) && j < len(a2) {
 		if a1[i] <= a2[j] {
