@@ -1,7 +1,7 @@
 package sort
 
 func childrenIndexes(i int) (li int, ri int) {
-	li, ri = 2 * i + 1, 2 * i + 2
+	li, ri = 2*i+1, 2*i+2
 	return
 }
 

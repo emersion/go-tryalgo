@@ -55,7 +55,7 @@ func TestNode_Closest(t *testing.T) {
 	n := newPopulated()
 	dist := 1
 
-	tests := []struct{
+	tests := []struct {
 		word, want []byte
 	}{
 		{[]byte("serial"), []byte("serial")},

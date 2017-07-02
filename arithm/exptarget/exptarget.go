@@ -7,13 +7,13 @@ import (
 )
 
 // Exp is either an Op or an Int.
-type Exp interface{
+type Exp interface {
 	String() string
 }
 
 // Op is an operation.
 type Op struct {
-	Type OpType
+	Type        OpType
 	Left, Right Exp
 }
 
@@ -61,7 +61,7 @@ func ExpTarget(numbers []int) map[int]Exp {
 
 	cache := make(map[uint32]map[int]Exp)
 	for i, n := range numbers {
-		cache[uint32(1) << uint(i)] = map[int]Exp{n: Int(n)}
+		cache[uint32(1)<<uint(i)] = map[int]Exp{n: Int(n)}
 	}
 
 	wholeSet := (uint32(1) << uint(len(numbers))) - 1
@@ -73,20 +73,20 @@ func ExpTarget(numbers []int) map[int]Exp {
 
 		for left := uint32(1); left < set; left++ {
 			// We want left in set
-			if left & set != left {
+			if left&set != left {
 				continue
 			}
 			right := set - left
 
 			for l, lexp := range cache[left] {
 				for r, rexp := range cache[right] {
-					cache[set][l + r] = &Op{OpAdd, lexp, rexp}
+					cache[set][l+r] = &Op{OpAdd, lexp, rexp}
 					if n := l - r; n > 0 {
 						cache[set][n] = &Op{OpSub, lexp, rexp}
 					}
-					cache[set][l * r] = &Op{OpMul, lexp, rexp}
-					if l % r == 0 {
-						cache[set][l / r] = &Op{OpDiv, lexp, rexp}
+					cache[set][l*r] = &Op{OpMul, lexp, rexp}
+					if l%r == 0 {
+						cache[set][l/r] = &Op{OpDiv, lexp, rexp}
 					}
 				}
 			}
