@@ -26,6 +26,49 @@ func (n *Node) Contains(word []byte) bool {
 	return cur.leaf
 }
 
+func (n *Node) closest(word []byte, dist int, closest []byte) []byte {
+	if len(word) == 0 {
+		if n.leaf {
+			return closest
+		} else {
+			return nil
+		}
+	}
+
+	// Perfect match
+	if child, ok := n.children[word[0]]; ok {
+		if closest := child.closest(word[1:], dist, append(closest, word[0])); closest != nil {
+			return closest
+		}
+	}
+
+	// Cannot mutate word anymore
+	if dist == 0 {
+		return nil
+	}
+
+	for b, child := range n.children {
+		// Insert
+		if closest := child.closest(word, dist-1, append(closest, b)); closest != nil {
+			return closest
+		}
+
+		// Change
+		if closest := child.closest(word[1:], dist-1, append(closest, b)); closest != nil {
+			return closest
+		}
+	}
+
+	// Remove
+	return n.closest(word[1:], dist-1, closest)
+}
+
+// Closest returns the closest word stored in this node with a Levenstein
+// distance of at most dist.
+func (n *Node) Closest(word []byte, dist int) []byte {
+	return n.closest(word, dist, nil)
+}
+
 // Append adds a word to this node.
 //
 // Complexity: O(len(word))
