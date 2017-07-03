@@ -36,9 +36,9 @@ func Levenshtein(w1, w2 []byte) int {
 			}
 
 			dist[i+1][j+1] = min(
-				dist[i][j] + letterDist(c1, c2), // Change
-				dist[i+1][j] + 1, // Delete
-				dist[i][j+1] + 1, // Insert
+				dist[i][j]+letterDist(c1, c2), // Change
+				dist[i+1][j]+1,                // Delete
+				dist[i][j+1]+1,                // Insert
 			)
 		}
 	}

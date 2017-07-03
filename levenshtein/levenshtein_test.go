@@ -7,9 +7,9 @@ import (
 )
 
 func TestLevenshtein(t *testing.T) {
-	tests := []struct{
+	tests := []struct {
 		w1, w2 string
-		dist int
+		dist   int
 	}{
 		{"abc", "abc", 0},
 		{"abc", "acc", 1},

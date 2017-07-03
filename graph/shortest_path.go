@@ -1,7 +1,7 @@
 package graph
 
 import (
-	"github.com/emersion/go-tryalgo/heap"
+	"github.com/emersion/go-tryalgo/container/heap"
 )
 
 func reverse(l []int) {

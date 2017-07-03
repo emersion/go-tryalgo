@@ -3,7 +3,7 @@ package unionfind_test
 import (
 	"testing"
 
-	"github.com/emersion/go-tryalgo/unionfind"
+	"github.com/emersion/go-tryalgo/container/unionfind"
 )
 
 func TestInts(t *testing.T) {

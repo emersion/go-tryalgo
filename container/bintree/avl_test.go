@@ -3,7 +3,7 @@ package bintree_test
 import (
 	"testing"
 
-	"github.com/emersion/go-tryalgo/bintree"
+	"github.com/emersion/go-tryalgo/container/bintree"
 )
 
 func TestAVL(t *testing.T) {

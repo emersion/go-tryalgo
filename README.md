@@ -6,7 +6,7 @@
 
 Basic and (maybe) advanced algorithms and data structures.
 
-Inspired from @jilljenn's [tryalgo in Python](https://github.com/jilljenn/tryalgo).
+Inspired from [@jilljenn](https://github.com/jilljenn)'s [tryalgo in Python](https://github.com/jilljenn/tryalgo).
 
 ## License
 

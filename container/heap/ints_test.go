@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/emersion/go-tryalgo/heap"
+	"github.com/emersion/go-tryalgo/container/heap"
 )
 
 func TestInts(t *testing.T) {

@@ -31,7 +31,7 @@ func Knapsack(weights, values []int, cap int) int {
 			without := opt[i-1][c]
 
 			if c >= weights[i] {
-				with := values[i] + opt[i-1][c - weights[i]]
+				with := values[i] + opt[i-1][c-weights[i]]
 				if with > without {
 					// Take this object
 					opt[i][c] = with

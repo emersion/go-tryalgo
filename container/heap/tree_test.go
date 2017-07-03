@@ -3,7 +3,7 @@ package heap_test
 import (
 	"testing"
 
-	"github.com/emersion/go-tryalgo/heap"
+	"github.com/emersion/go-tryalgo/container/heap"
 )
 
 func TestTree(t *testing.T) {
